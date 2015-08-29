@@ -1,6 +1,7 @@
 {{!
-@param Array<URI> classes
-@param int        offset
+@param Array<Array<URI, URI>> selectors
+@param int                    limit
+@param int                    offset
 }}
 
 PREFIX csdb:    <http://cs.dbpedia.org/property/>
@@ -8,36 +9,36 @@ PREFIX dbo:     <http://dbpedia.org/ontology/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?s
-       (SAMPLE(?_label) AS ?label)
-       (SAMPLE(?_description) AS ?description)
-       (GROUP_CONCAT(DISTINCT ?surfaceForm ; separator = "|") AS ?surfaceForms)
+SELECT ?subject
+      (STR(SAMPLE(?_label)) AS ?label)
+      (STR(SAMPLE(?_description)) AS ?description) 
+      (GROUP_CONCAT(DISTINCT ?surfaceForm ; separator = "|") AS ?surfaceForms)
 WHERE {
   {
-    SELECT ?s
+    SELECT ?subject
     WHERE {
       {
-        SELECT ?s (COUNT(?link) AS ?inDegree)
+        SELECT ?subject (COUNT(?link) AS ?inDegree)
         WHERE {
           GRAPH <http://cs.dbpedia.org> {
-            VALUES ?class {
-              {{#classes}}
-              <{{{.}}}>
-              {{/classes}}
+            VALUES (?p ?o) {
+              {{#selectors}}
+              (<{{{p}}}> <{{{o}}}>)
+              {{/selectors}}
             }
-            ?s a ?class .
-            ?link dbo:wikiPageWikiLink ?s .
+            ?subject ?p ?o .
+            ?link dbo:wikiPageWikiLink ?subject .
           }
         }
-        GROUP BY ?s
+        GROUP BY ?subject
         ORDER BY DESC(?inDegree)
       }
     }
     OFFSET {{offset}}
-    LIMIT 1000
+    LIMIT 5000
   }
   GRAPH <http://cs.dbpedia.org> {
-    ?s rdfs:label ?_label ;
+    ?subject rdfs:label ?_label ;
       dbo:abstract ?_description .
     FILTER (!REGEX(?_label, "^(\\p{Lu}\\.?)+$") {{! Filter out abbreviations, such as "R.E.M.". }}
             &&
@@ -47,7 +48,9 @@ WHERE {
             &&
             langMatches(lang(?_label), "cs")
             &&
-            langMatches(lang(?_description), "cs"))
+            langMatches(lang(?_description), "cs")
+            &&
+            (STRLEN(?_label) < 40)) {{! Eliminate too long labels. }} 
     VALUES ?surfaceFormProperty {
       csdb:name
       csdb:název
@@ -57,15 +60,15 @@ WHERE {
       dcterms:title
     }
     OPTIONAL {
-      ?s ?surfaceFormProperty ?surfaceForm .
+      ?subject ?surfaceFormProperty ?surfaceForm .
       {{! Prevent empty surface forms }}
       FILTER (isLiteral(?surfaceForm)
               &&
-              STRLEN(STR(?surfaceForm)) > 0
+              STRLEN(STR(?surfaceForm)) > 2
               &&
               !regex(STR(?surfaceForm), "^\\s+$"))
     }
   }
 }
-GROUP BY ?s
-LIMIT 28 {{! The board has 28 items. }}
+GROUP BY ?subject
+LIMIT {{limit}}
