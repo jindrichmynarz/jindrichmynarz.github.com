@@ -1,0 +1,16 @@
+/* some style */
+
+body {
+  background-color: #000000;
+  background-image: -webkit-linear-gradient(left, #000000, #333233);
+  background-image:         linear-gradient(to right, #000000, #333233);
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Roboto Mono", Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #fafafa;
+  font-size: 1.44em;
+}
