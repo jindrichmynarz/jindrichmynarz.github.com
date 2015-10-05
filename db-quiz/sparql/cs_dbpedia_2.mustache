@@ -1,7 +1,5 @@
 {{!
 @param Array<Array<URI, URI>> selectors
-@param int                    tertile-size
-@param int                    tertile-offset
 @param int                    limit
 @param int                    offset
 }}
@@ -51,8 +49,8 @@ WHERE {
             ORDER BY DESC(?indegree)
           }
         }
-        LIMIT {{tertile-size}} {{! Size of tertile interval }}
-        OFFSET {{tertile-offset}} {{! Tertile's offset }}
+        LIMIT {{tertile-size}} 
+        OFFSET {{tertile-offset}} 
       }
       GRAPH <http://cs.dbpedia.org> {
         ?subject rdfs:label ?_label ;

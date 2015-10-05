@@ -1,60 +1,45 @@
 {{!
-@param Array<URI> classes
-@param int        limit
-@param int        offset
+@param Array<Array<URI, URI>> selectors
+@param int                    limit
+@parem int                    offset
 }}
 
 PREFIX dbo:     <http://dbpedia.org/ontology/>
-PREFIX owl:     <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
 
 SELECT ?subject
-      (STR(SAMPLE(?_label)) AS ?label)
-      (STR(SAMPLE(?_description)) AS ?description) 
-      (GROUP_CONCAT(DISTINCT ?surfaceForm ; separator = "|") AS ?surfaceForms)
+       ?label
+       ?description
+       (GROUP_CONCAT(DISTINCT ?surfaceForm ; separator = "|") AS ?surfaceForms)
 WHERE {
   {
     SELECT ?subject
     WHERE {
       {
-        SELECT ?subject (COUNT(DISTINCT ?alias) AS ?degree)
+        SELECT ?subject
         WHERE {
-          GRAPH <http://dbpedia.org> {
+          GRAPH <http://dbpedia.org/db-quiz> {
             VALUES ?class {
-              {{#classes}}
-              <{{{.}}}>
-              {{/classes}}
+              {{#selectors}}
+              <{{{o}}}>
+              {{/selectors}}
             }
-            ?subject a ?class .
-            {
-              ?subject owl:sameAs ?alias .
-            } UNION {
-              ?alias owl:sameAs ?subject .
-            }
+            ?subject a ?class ;
+              dbo:wikiPageInDegree ?indegree .
           }
         }
-        GROUP BY ?subject
-        ORDER BY DESC(?degree)
+        GROUP BY ?subject ?indegree
+        ORDER BY DESC(?indegree)
       }
     }
+    LIMIT {{limit}}
     OFFSET {{offset}}
-    LIMIT 1000
   }
-  GRAPH <http://dbpedia.org> {
-    ?subject rdfs:label ?_label ;
-      dbo:abstract ?_description .
-    FILTER (!REGEX(?_label, "^(\\p{Lu}\\.?)+$") {{! Filter out abbreviations, such as "R.E.M.". }}
-            &&
-            !REGEX(?_label, "^.*\\d+.*$") {{! Eliminate digits }}
-            &&
-            (STRLEN(?_description) > 140) {{! Get only resources with longer descriptions. }} 
-            &&
-            langMatches(lang(?_label), "en")
-            &&
-            langMatches(lang(?_description), "en")
-            &&
-            (STRLEN(?_label) < 40)) {{! Eliminate too long labels. }} 
+  GRAPH <http://dbpedia.org/db-quiz> {
+    ?subject rdfs:label ?label ;
+      dbo:abstract ?description ;
+      skos:altLabel ?surfaceForm .
   }
 }
-GROUP BY ?subject
-LIMIT {{limit}}
+GROUP BY ?subject ?label ?description
