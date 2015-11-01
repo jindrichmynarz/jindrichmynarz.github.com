@@ -1,0 +1,42 @@
+{{!
+@param int                             difficulty
+@param Array<Array<IRI, IRI, boolean>> selectors
+@param int                             limit
+}}
+
+PREFIX dbo:     <http://dbpedia.org/ontology/>
+PREFIX dbq:     <http://mynarz.net/db-quiz/ontology/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?subject
+       ?label
+       ?description
+       (GROUP_CONCAT(DISTINCT ?surfaceForm ; separator = "|") AS ?surfaceForms)
+       ?selectorPredicate
+       ?selectorObject
+WHERE {
+  {{#selectors}}
+  {
+    SELECT DISTINCT ?subject (<{{{p}}}> AS ?selectorPredicate) (<{{{o}}}> AS ?selectorObject)
+    WHERE {
+      GRAPH <http://dbpedia.org/db-quiz> {
+        ?subject dbq:difficulty [
+          dbq:forSelector [ <{{{p}}}> <{{{o}}}> ] ;
+          dbq:difficultyLevel ?difficulty 
+        ] .
+        FILTER (?difficulty >= {{difficulty}})
+        ?subject rdfs:label ?label .
+      }
+    }
+    ORDER BY ?difficulty RAND() 
+    LIMIT {{limit}}
+  } {{#union?}}UNION{{/union?}}
+  {{/selectors}}
+  GRAPH <http://dbpedia.org/db-quiz> {
+    ?subject rdfs:label ?label ;
+      dbo:abstract ?description ;
+      skos:altLabel ?surfaceForm .
+  }
+}
+GROUP BY ?subject ?label ?description ?selectorPredicate ?selectorObject
