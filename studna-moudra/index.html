@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <title>Studna moudra: zkopíruj moudro!</title>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i&amp;subset=latin-ext" rel="stylesheet">
+		<style type="text/css">
+			body {
+				font-family: "Libre Baskerville", serif;
+        color: #333;
+        background: #fdfdfd;
+			}
+      #wrapper {
+        margin: 2em auto 0 auto;
+        width: 66%;
+      }
+      header {
+        float: left;
+        position: fixed;
+        width: 14em;
+      }
+      h1 {
+        font-size: 3em;
+        margin: 0;
+      }
+			h2 {
+        font-size: 1.33em;
+        color: #666;
+			}
+			::selection {
+				background: #ff69b4;
+			}
+      ::-moz-selection {
+				background: #ff69b4;
+      }
+      .klausUnderline {
+        text-decoration: underline wavy red;
+      }
+      #quotes {
+        width: 37em;
+        float: right;
+      }
+		</style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <h1>Studna<br>moudra</h1>
+        <h2 title="CTRL+C CTRL+V">Zkopíruj <span class="klausUnderline">moudro</span>!</h2>
+      </header>
+      <section id="quotes">
+        <p>„Je lepší zapálit jednu svíčku, než proklínat temnotu.”<br><em>― Konfucius</em></p>
+        <p>„Buďte ten perfektní pár, který každý nenávidí.”<br><em>― Jan Plavec</em></p>
+        <p>„Svět bez lásky je smrtícím místem.”<br><em>― Helen Fisher</em></p>
+        <p>„To chci. Tak to bude.”<br><em>― Henry Ford</em></p>
+        <p>„Být bohatý znamená mít peníze a čas.”<br><em>― Jan Plavec</em></p>
+        <p>„Na každou nemoc existují léky a způsoby léčení. Ne však pro člověka, který je osamělý, kterého nikdo nechce. To je malomocenství Západu.”<br><em>― Matka Tereza</em></p>
+        <p>„Doufat je málo, snít je víc, konat je nejvíc.”</p>
+        <p>„Hateři potvrzují tvůj úspěch!”<br><em>― Jan Plavec</em></p>
+        <p>„Když něco opravdu chceš, celý vesmír se spojí, abys to mohl uskutečnit.”<br><em>― Paulo Coelho</em></p>
+        <p>„Milovat neznamená hledět jeden na druhého, ale pohlížet společně jedním směrem.”<br><em>― Antoine de Saint-Exupéry</em></p>
+        <p>„Pokud přestanete jít za svými sny, přestanete žít.”</p>
+        <p>„Sto mužů dokáže postavit tábor, ale jen jedna žena umí vytvořit domov.”<br><em>― Konfucius</em></p>
+        <p>„Velké myšlenky přitahují velké myšlenky. Průměrné myšlenky přitahují průměrné myšlenky.”<br><em>― Jan Plavec</em></p>
+        <p>„Všechno je těžké, dokud se to nestane lehkým.”<br><em>― Thomas Fuller</em></p>
+      </section>
+    </div>
+    <script type="text/javascript">
+      var signature = " ― prof. Ing. Václav Klaus, CSc., dr. h. c. mult.";
+      var klausisms = [
+"Environmentalismus není nic jiného než novodobá inkarnace tradičního levičáctví.",
+"Amerika působila beznadějněji a beznadějněji a posun potřebovala. Doufám, že to bude posun proti ubíjející politické korektnosti, multikulturalismu, genderismu, environmentalismu.",
+"O výrazu etika neumím hluboce filozofovat a filozofování o tomto slově ani moc nevěřím.",
+"Politická korektnost je jedna z nejzhoubnějších věcí dnešní doby, je stejně děsivá jako marxismus, vrací nás nekonečně dozadu.",
+"I já jsem vlekař!",
+"Hluk je neodstranitelnou součástí životního prostředí člověka, protože je důsledkem aktivního a produktivního života lidí. Snaha hluk beze zbytku odstranit (nebo jej totálně plánovat a regulovat) je neslučitelná se samotnou podstatou svobodné společnosti.",
+"Proti nám jela na kole žena, která měla v jakémsi kočárku před sebou dvě malé děti a na prsou dítě třetí. To není výraz zoufalé sociální situace této ženy, to je od ní záměrná agresivní symbolika.",
+"Diskutujme například o mých seminářích, které shromažďovaly minimálně tak velký počet lidí jako jakékoliv aktivity takzvaného disentu.",
+"Ten šok, když zjistíte, co v té guatemalské univerzitě mají mých textů a odkazů na mé texty, je naprosto deprimující.",
+"Novináři jsou největšími nepřáteli lidstva.",
+"Žádné ničení planety nevidím, nikdy v životě jsem neviděl a nemyslím, že nějaký vážný a rozumný člověk by to mohl říci.",
+"Čokoládový krém je pravicový, salát levicová úchylka a antijídlo.",
+"Já v žádném případě netvrdím, že jsem bůh.",
+"Dali jsme si vepřový řízek, kuřecí řízek je levicové jídlo.",
+"Bublinková voda je konzervativní, zatímco ta bez bublinek je okázalý módní výstřelek.",
+"Byla to nevýhra.",
+"Dovolená? To je barbaric relic, barbarský přežitek minulého století. Minulého tisíciletí.",
+"Musím říct, že to není pero, je to normální propiska. Aby nebyly nějaké velké oči.",
+"Prostě letíme letadlem, vládní letkou, a najednou turbulence. A teď někteří zblednou – a já nehnu brvou, čtu a podtrhávám si dál.",
+"Nové strany jsou největším nebezpečím demokracie.",
+"Nevěřím, že se s minulostí může vyrovnat abstraktní entita zvaná společnost."
+      ];
+      var generateKlausism = function () {
+        return "„" + klausisms[Math.floor(Math.random() * klausisms.length)] + "”" + signature;
+      };
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+        e.clipboardData.setData("text/plain", generateKlausism());
+      }); 
+    </script>
+  </body>
+</html>
