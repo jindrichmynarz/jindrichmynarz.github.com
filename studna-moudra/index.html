@@ -41,6 +41,16 @@
         width: 37em;
         float: right;
       }
+      .footnote {
+        opacity: 0;
+        font-size: .33em;
+        color: #666;
+        transform: scaleX(-1) scaleY(-1);
+      }
+      header:hover .footnote {
+        opacity: 1;
+        transition: opacity 1s ease-out;
+      }
 		</style>
   </head>
   <body>
@@ -48,6 +58,8 @@
       <header>
         <h1>Studna<br>moudra</h1>
         <h2 title="CTRL+C CTRL+V">Zkopíruj <span class="klausUnderline">moudro</span>!</h2>
+        <p>Ať zkopíruješ cokoli, vždy z&nbsp;toho vyjde moudro.*</p>
+        <p class="footnote">*Pozor humor.</p>
       </header>
       <section id="quotes">
         <p>„Je lepší zapálit jednu svíčku, než proklínat temnotu.”<br><em>― Konfucius</em></p>
@@ -96,7 +108,7 @@
       var generateKlausism = function () {
         return "„" + klausisms[Math.floor(Math.random() * klausisms.length)] + "”" + signature;
       };
-      document.addEventListener("copy", function (e) {
+      document.getElementById("quotes").addEventListener("copy", function (e) {
         e.preventDefault();
         e.clipboardData.setData("text/plain", generateKlausism());
       }); 
