@@ -43,13 +43,25 @@
       }
       .footnote {
         opacity: 0;
-        font-size: .33em;
+        font-size: .66em;
         color: #666;
         transform: scaleX(-1) scaleY(-1);
       }
       header:hover .footnote {
         opacity: 1;
         transition: opacity 1s ease-out;
+      }
+      a {
+        color: #334d77; 
+      }
+      a:visited {
+        color: #2e3a4c;
+      }
+      #attribution {
+        float: left;
+        bottom: 1em;
+        position: fixed;
+        width: 14em;
       }
 		</style>
   </head>
@@ -61,6 +73,7 @@
         <p>Ať zkopíruješ cokoli, vždy z&nbsp;toho vyjde moudro.*</p>
         <p class="footnote">*Pozor humor.</p>
       </header>
+      <section id="attribution">Made with 😄 by <a href="https://twitter.com/jindrichmynarz">@jindrichmynarz</a>.</section>
       <section id="quotes">
         <p>„Je lepší zapálit jednu svíčku, než proklínat temnotu.”<br><em>― Konfucius</em></p>
         <p>„Buďte ten perfektní pár, který každý nenávidí.”<br><em>― Jan Plavec</em></p>
