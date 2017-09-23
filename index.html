@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#">
+<html prefix="cert: http://www.w3.org/ns/auth/cert#
+              foaf: http://xmlns.com/foaf/0.1/
+              og:   http://ogp.me/ns#
+              xsd:  http://www.w3.org/2001/XMLSchema#">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -25,17 +28,22 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body about="#jindrich" typeof="Person" vocab="http://schema.org/">
+  <body about="#jindrich" typeof="Person foaf:Person" vocab="http://schema.org/">
     <div class="wrapper">
       <header>
         <img rel="image" id="portrait" src="img/portrait.jpg" alt="Jindřich Mynarz"/>
-        <h1 property="name">Jindřich Mynarz</h1>
+        <h1 property="name foaf:name">Jindřich Mynarz</h1>
         <ul>
           <li><a href="http://twitter.com/jindrichmynarz">Twitter</a></li>
           <li><a href="http://blog.mynarz.net">Blog</a></li>
           <li><a href="https://github.com/jindrichmynarz">GitHub profile</a></li>
           <li><a href="https://cz.linkedin.com/in/jindrichmynarz">LinkedIn profile</a></li>
         </ul>
+        <span id="cert" property="cert:key" resource="http://mynarz.net/#cert" typeof="cert:RSAPublicKey">
+          <span property="cert:modulus" datatype="xsd:hexBinary"
+                                        content="A22B3619F8F6FC12D86220E365FA83E39AB43C4FE2846C83FBA15F1B77FA5C481C3B9A13EDA3D5002B360F7D806CF39BFF044858F37CFF8E2E20AF85D0A54DF9F487EE8E3654D7ED05955D145CE44A72185C26ADCEFBF42B81679936AB380F3CC40EF94262D6A5FA5A561561647512B1A5768688A8B62043362F1732EF74111A1F9D2C0735C29486CC0965C2C2CC9129AC2249105CB1624CF852E2245872AEB319C36067BD486D0EF90B2F4D8BEB8600954A0468323BEA9D21E986EC34C056D04A06F4B981BBD137E83E0A8BD194281E8660ADA0AC62CBCA50BCB8620704CFE4BB857C16E2349CA7178CC4BDAEE60B09C7B0379457EB2E6BEEEBE44B20CE6C71"></span>
+          <span property="cert:exponent" datatype="xsd:nonNegativeInteger" content="65537"></span>
+        </span>
       </header>
 
       <section>
