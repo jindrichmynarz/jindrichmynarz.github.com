@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  height: 100vh;
+  color: #202020;
+  background: #fafafa;
+}
+section {
+  width: 66vh;
+}
+label {
+  display: inline-block;
+  width: 30vh;
+}
+button {
+  margin-left: 30vh;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wikitrendy na mapě</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <section>
+      <h1>Wikitrendy na mapě</h1>
+      <p>Wikipedie nabízí <a href="https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageviews">statistiky nejčtenějších stránek</a> a <a href="https://www.wikidata.org">Wikidata</a> zase <small>někdy</small> ví, kde je to, o čem stránky píšou.</p>
+      <form id="wikitrends">
+        <p>
+          <label for="wiki_lang">Jazyková verze Wikipedie:</label>
+          <input id="wiki_lang"
+                 name="wiki_lang"
+                 type="text"
+                 minlength="2"
+                 value="cs"
+                 pattern="[a-z]{2,}"
+                 autofocus/>
+        </p>
+        <p>
+          <label for="year_month">Měsíc a rok:</label>
+          <input id="year_month"
+                 name="year_month"
+                 type="month"
+                 min="2015-10"/>
+        </p>
+        <p>
+          <label for="number">Počet populárních stránek:</label>
+          <input id="number"
+                 name="number"
+                 type="number"
+                 min="1"
+                 max="1000"
+                 value="100"/>
+        </p>
+        <p>
+          <button type="submit">Budiž mapa</button>
+        </p>
+      </form>
+    </section>
+    <script src="wikitrends.js"></script>
+  </body>
+</html>
